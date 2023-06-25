@@ -42,6 +42,7 @@ async function getData() {
   map.setView([latitude, longitude]);
 }
 
-
 getData();
-setInterval(getData, 2000);
+
+// Increased the interval slightly above 1 second because it was rate limited occasionally.
+setInterval(getData, 1200);
