@@ -19,17 +19,18 @@
     ></script>
   </head>
   <body class="bg-indigo-50">
-    <div class="container mx-auto space-y-4 px-4 py-5 font-sans">
+    <div class="container mx-auto max-w-4xl space-y-4 px-4 py-4 font-sans">
       <h1 class="text-3xl font-bold">Where Is The ISS?</h1>
-      <br />
-      <div class="flex justify-around font-bold">
-        <div>Longitude: <span id="lon"></span>°</div>
-        <div>Latitude: <span id="lat"></span>°</div>
-        <div>Altitude: <span id="alt"></span> km</div>
-      </div>
-      <div class="flex justify-around font-bold">
-        <div>Velocity: <span id="vel"></span> km/h</div>
-        <div class=""><span id="vis" class="rounded-md p-1"></span></div>
+      <div
+        class="flex-row flex-wrap justify-start font-bold sm:flex sm:justify-around"
+      >
+        <div class="px-4 py-2">Longitude: <span id="lon"></span>°</div>
+        <div class="px-4 py-2">Latitude: <span id="lat"></span>°</div>
+        <div class="px-4 py-2">Altitude: <span id="alt"></span> km</div>
+        <div class="px-4 py-2">Velocity: <span id="vel"></span> km/h</div>
+        <div class="px-4 py-2">
+          <span id="vis" class="rounded-md p-1"></span>
+        </div>
       </div>
       <div class="rounded-2xl"><div class="rounded-2xl" id="issMap"></div></div>
     </div>
