@@ -12,7 +12,7 @@ To use this application, follow these steps:
 
 ## Usage
 
-Navigate to the index.html, you will see the current longitude, latitude, and altitude of the ISS. The map will display the location of the ISS using a marker.
+Navigate to the index.html or current domain of the project, you will see the current longitude, latitude, and altitude of the ISS. The map will display the location of the ISS using a marker.
 
 ## Dependencies
 
