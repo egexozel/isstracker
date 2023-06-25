@@ -21,23 +21,23 @@ const apiUrl = "https://api.wheretheiss.at/v1/satellites/25544";
 async function getData() {
   const response = await fetch(apiUrl);
   const data = await response.json();
-  let { latitude, longitude, altitude, velocity, visibility  } = data;
+  let { latitude, longitude, altitude, velocity, visibility } = data;
 
   document.getElementById("lon").textContent = longitude.toFixed(2);
   document.getElementById("lat").textContent = latitude.toFixed(2);
   document.getElementById("alt").textContent = altitude.toFixed(3);
   document.getElementById("vel").textContent = velocity.toFixed(2);
-    console.log(visibility);
-  if (visibility === 'daylight') {
-    document.getElementById("vis").textContent = 'The ISS is in daylight';
-    document.getElementById("vis").classList.add('bg-amber-200', 'text-inherit');
-    document.getElementById("vis").classList.remove('bg-sky-900', 'text-slate-200');
-  } else if (visibility === 'eclipsed') {
-    document.getElementById("vis").textContent = 'The ISS is in the dark';
+  console.log(visibility);
+  if (visibility === "daylight") {
+    document.getElementById("vis").textContent = "The ISS is in daylight";
+    document.getElementById("vis").classList.add("bg-amber-200", "text-inherit");
+    document.getElementById("vis").classList.remove("bg-sky-900", "text-slate-200");
+  } else if (visibility === "eclipsed") {
+    document.getElementById("vis").textContent = "The ISS is in the dark";
     document.getElementById("vis").classList.remove("bg-amber-200");
-    document.getElementById("vis").classList.add('bg-sky-900', 'text-slate-200');
-    }
-  
+    document.getElementById("vis").classList.add("bg-sky-900", "text-slate-200");
+  }
+
   marker.setLatLng([latitude, longitude]);
   map.setView([latitude, longitude]);
 }
