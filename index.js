@@ -18,30 +18,34 @@ const apiUrl = "https://api.wheretheiss.at/v1/satellites/25544";
 
 // Get the current location of the ISS from the API and update the info elements and the map marker on the map
 async function getData() {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    let { latitude, longitude, altitude, velocity, visibility } = data;
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        let { latitude, longitude, altitude, velocity, visibility } = data;
 
-    document.getElementById("lon").textContent = longitude.toFixed(2);
-    document.getElementById("lat").textContent = latitude.toFixed(2);
-    document.getElementById("alt").textContent = altitude.toFixed(3);
-    document.getElementById("vel").textContent = velocity.toFixed(2);
+        document.getElementById("lon").textContent = longitude.toFixed(2);
+        document.getElementById("lat").textContent = latitude.toFixed(2);
+        document.getElementById("alt").textContent = altitude.toFixed(3);
+        document.getElementById("vel").textContent = velocity.toFixed(2);
 
-    console.log(response.status);
+        console.log(response.status);
 
-    if (visibility === "daylight") {
-        document.getElementById("vis").textContent = "The ISS is in daylight";
-        document.getElementById("vis").classList.add("bg-amber-200", "text-inherit");
-        document.getElementById("vis").classList.remove("bg-sky-900", "text-slate-200");
-    } else if (visibility === "eclipsed") {
-        document.getElementById("vis").textContent = "The ISS is in the dark";
-        document.getElementById("vis").classList.remove("bg-amber-200");
-        document.getElementById("vis").classList.add("bg-sky-900", "text-slate-200");
+        if (visibility === "daylight") {
+            document.getElementById("vis").textContent = "The ISS is in daylight";
+            document.getElementById("vis").classList.add("bg-amber-200", "text-inherit");
+            document.getElementById("vis").classList.remove("bg-sky-900", "text-slate-200");
+        } else if (visibility === "eclipsed") {
+            document.getElementById("vis").textContent = "The ISS is in the dark";
+            document.getElementById("vis").classList.remove("bg-amber-200");
+            document.getElementById("vis").classList.add("bg-sky-900", "text-slate-200");
+        }
+
+        marker.setLatLng([latitude, longitude]);
+        map.setView([latitude, longitude]);
+        return { longitude, latitude };
+    } catch (error) {
+        console.error(error);
     }
-
-    marker.setLatLng([latitude, longitude]);
-    map.setView([latitude, longitude]);
-    return { longitude, latitude };
 }
 
 // Function to look up the country from lat and lon
@@ -70,5 +74,5 @@ async function locationLookup() {
 getData();
 
 // Increased the interval slightly above 1 second because it was rate limited occasionally.
-setInterval(getData, 1200);
-setInterval(locationLookup, 4000);
+setInterval(getData, 1500);
+setInterval(locationLookup, 5000);
