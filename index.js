@@ -51,9 +51,10 @@ async function getData() {
 // Function to look up the country from lat and lon
 async function locationLookup() {
     try {
+        const regionNamesInEnglish = new Intl.DisplayNames(["en"], { type: "region" });
         const { latitude, longitude } = await getData(); // Retrieve latitude and longitude values from getData()
         const response = await fetch(
-            "https://api.wheretheiss.at/v1/coordinates/" + longitude.toFixed(2) + "," + latitude.toFixed(2)
+            "https://api.wheretheiss.at/v1/coordinates/" + latitude.toFixed(6) + "," + longitude.toFixed(6)
         );
         const data = await response.json();
         let { country_code } = data;
@@ -63,7 +64,7 @@ async function locationLookup() {
         if (!country_code || country_code === "??") {
             document.getElementById("cc").textContent = "Unavailable";
         } else {
-            document.getElementById("cc").textContent = country_code;
+            document.getElementById("cc").textContent = regionNamesInEnglish.of(country_code);
         }
     } catch (error) {
         document.getElementById("cc").textContent = "Unavailable";
