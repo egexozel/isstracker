@@ -27,7 +27,6 @@ async function getData() {
     document.getElementById("alt").textContent = altitude.toFixed(3);
     document.getElementById("vel").textContent = velocity.toFixed(2);
 
-    console.log(visibility);
     console.log(response.status);
 
     if (visibility === "daylight") {
@@ -55,8 +54,15 @@ async function locationLookup() {
         const data = await response.json();
         let { country_code } = data;
         console.log(country_code);
-        document.getElementById("cc").textContent = country_code;
+
+        // If ISS is on international waters, the API either does not respond or returns a value of "??"
+        if (!country_code || country_code === "??") {
+            document.getElementById("cc").textContent = "Unavailable";
+        } else {
+            document.getElementById("cc").textContent = country_code;
+        }
     } catch (error) {
+        document.getElementById("cc").textContent = "Unavailable";
         console.error(error);
     }
 }
