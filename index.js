@@ -73,6 +73,7 @@ async function locationLookup() {
 }
 
 getData();
+locationLookup();
 
 // Increased the interval slightly above 1 second because it was rate limited occasionally.
 setInterval(getData, 1500);
